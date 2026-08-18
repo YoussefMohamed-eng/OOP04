@@ -29,6 +29,159 @@
 
 
             #endregion
+
+            #region Part 02 — Practical
+            // Driver
+            Driver driver = new Driver(
+                1,
+                "Ahmed Mohamed",
+                "01012345678"
+            );
+
+            // Delivery Center
+            DeliveryCenter center =
+                new DeliveryCenter("Smart Delivery Center");
+
+            center.Driver = driver;
+
+            // Address 1
+            DeliveryAddress address1 =
+                new DeliveryAddress(
+                    "Cairo",
+                    "Tahrir Street",
+                    15
+                );
+
+            // Address 2
+            DeliveryAddress address2 =
+                new DeliveryAddress(
+                    "Cairo",
+                    "Nasr City",
+                    20
+                );
+
+            // Address 3
+            DeliveryAddress address3 =
+                new DeliveryAddress(
+                    "Berlin",
+                    "Main Street",
+                    10
+                );
+
+            // Standard Shipment
+            StandardShipment standard =
+                new StandardShipment(
+                    "SH001",
+                    "Laptop",
+                    3,
+                    80,
+                    address1
+                );
+
+            // Express Shipment
+            ExpressShipment express =
+                new ExpressShipment(
+                    "SH002",
+                    "Mobile Phone",
+                    2,
+                    60,
+                    address2,
+                    30
+                );
+
+            // International Shipment
+            InternationalShipment international =
+                new InternationalShipment(
+                    "SH003",
+                    "Television",
+                    8,
+                    120,
+                    address3,
+                    "Germany",
+                    100
+                );
+
+            // Add shipments
+            center.AddShipment(standard);
+            center.AddShipment(express);
+            center.AddShipment(international);
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Delivery Center");
+            Console.WriteLine("==========================================");
+
+            Console.WriteLine("Driver : " + center.Driver.FullName);
+            Console.WriteLine("------------------------------------------");
+
+            // Print all shipments
+            center.PrintAllShipments();
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Tracking Status");
+            Console.WriteLine("==========================================");
+
+            // DeliveryCenter tracking
+            center.PrintTrackingStatuses();
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine("Insurance");
+            Console.WriteLine("==========================================");
+
+            Console.WriteLine(
+                "Standard Shipment Insurance : " +
+                standard.CalculateInsurance().ToString("0.00") +
+                " EGP");
+
+            Console.WriteLine(
+                "Express Shipment Insurance : " +
+                express.CalculateInsurance().ToString("0.00") +
+                " EGP");
+
+            Console.WriteLine(
+                "International Shipment Insurance : " +
+                international.CalculateInsurance().ToString("0.00") +
+                " EGP");
+
+            Console.WriteLine("==========================================");
+
+            // Interface Polymorphism - ITrackable
+            ITrackable[] trackableShipments =
+            {
+            standard,
+            express,
+            international
+        };
+
+            Console.WriteLine("ITrackable Array:");
+
+            foreach (ITrackable shipment in trackableShipments)
+            {
+                DeliveryReport.PrintShipment(shipment);
+            }
+
+            Console.WriteLine("------------------------------------------");
+
+            // Interface Polymorphism - IInsurable
+            IInsurable[] insurableShipments =
+            {
+            standard,
+            express,
+            international
+        };
+
+            Console.WriteLine("IInsurable Array:");
+
+            foreach (IInsurable shipment in insurableShipments)
+            {
+                DeliveryReport.PrintInsurance(shipment);
+            }
+
+            Console.WriteLine("==========================================");
+            Console.WriteLine(
+                "Interface Polymorphism Demonstrated Successfully.");
+            Console.WriteLine("==========================================");
         }
+
+            #endregion
     }
 }
